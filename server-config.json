@@ -2,7 +2,7 @@
   "inbounds": [
     {
       "type": "shadowtls",
-      "listen_port": 443,
+      "listen_port": "自定义端口",
       "handshake": {
         "server": "握手网站",
         "server_port": 443
