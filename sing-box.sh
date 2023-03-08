@@ -53,6 +53,10 @@ archAffix(){
 }
 
 install_singbox(){
+    echo -n "握手网站:"                   
+    read  tlsdomain
+    echo -n "自定义端口:"                   
+    read  custom_port
     version_tag=$(curl -Ls "https://api.github.com/repos/SagerNet/sing-box/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     if [[ -z "$version_tag" ]]; then
         red "检测 Sing-box 版本失败，可能是超出 Github API 限制，请稍后再试"
@@ -72,11 +76,11 @@ install_singbox(){
     fi
 
     rm -f /etc/sing-box/config.json
-    wget --no-check-certificate -O /etc/sing-box/config.json https://raw.githubusercontent.com/lanhebe/singbox-shadowtls/main/configs/server-config.json
+    wget --no-check-certificate -O /etc/sing-box/config.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/server-config.json
     
     mkdir /root/sing-box
-    wget --no-check-certificate -O /root/sing-box/client-sockshttp.json https://raw.githubusercontent.com/lanhebe/singbox-shadowtls/main/configs/client-sockshttp.json
-    wget --no-check-certificate -O /root/sing-box/client-tun.json https://raw.githubusercontent.com/lanhebe/singbox-shadowtls/main/configs/client-tun.json
+    wget --no-check-certificate -O /root/sing-box/client-sockshttp.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/client-sockshttp.json
+    wget --no-check-certificate -O /root/sing-box/client-tun.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/client-tun.json
     
     wgcfv6status=$(curl -s6m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
     wgcfv4status=$(curl -s4m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
@@ -103,6 +107,14 @@ install_singbox(){
     sed -i "s/填写自定义密码/${ps}/g" /etc/sing-box/config.json
     sed -i "s/填写自定义密码/${ps}/g" /root/sing-box/client-sockshttp.json
     sed -i "s/填写自定义密码/${ps}/g" /root/sing-box/client-tun.json
+    # tlsdomain
+    sed -i "s/握手网站/$tlsdomain/g" /etc/sing-box/config.json
+    sed -i "s/握手网站/$tlsdomain/g" /root/sing-box/client-sockshttp.json
+    sed -i "s/握手网站/$tlsdomain/g" /root/sing-box/client-tun.json
+    # custom_port
+    sed -i "s/自定义端口/$custom_port/g" /etc/sing-box/config.json
+    sed -i "s/自定义端口/$custom_port/g" /root/sing-box/client-sockshttp.json
+    sed -i "s/自定义端口/$custom_port/g" /root/sing-box/client-tun.json
 
     
     systemctl start sing-box
@@ -145,11 +157,6 @@ menu(){
     clear
     echo "#############################################################"
     echo -e "#              ${RED} Sing-box+ShadowTLS  一键管理脚本${PLAIN}            #"
-    echo -e "# ${GREEN}作者${PLAIN}: MisakaNo & Littleyu修改                                  #"
-    echo -e "# ${YELLOW}脚本适用于"Ubuntu" "CentOS" "CentOS" "Fedora"    #"
-    echo -e "# ${GREEN}博客${PLAIN}: https://www.yugogo.xyz                            #"
-    echo -e "# ${GREEN}GitHub 项目${PLAIN}: https://github.com/lanhebe/singbox-shadowtls               #"
-    echo -e "# ${GREEN}YouTube 频道${PLAIN}: https://www.youtube.com/@yulittle6079        #"
     echo "#############################################################"
     echo ""
     echo -e " ${GREEN}1.${PLAIN} 安装 Sing-box"
