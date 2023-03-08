@@ -55,8 +55,8 @@ archAffix(){
 install_singbox(){
     echo -n "握手网站:"                   
     read  tlsdomain
-    echo -n "自定义端口:"                   
-    read  custom_port
+   # echo -n "自定义端口:"                   
+   # read  custom_port
     version_tag=$(curl -Ls "https://api.github.com/repos/SagerNet/sing-box/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     if [[ -z "$version_tag" ]]; then
         red "检测 Sing-box 版本失败，可能是超出 Github API 限制，请稍后再试"
@@ -112,9 +112,9 @@ install_singbox(){
     sed -i "s/握手网站/$tlsdomain/g" /root/sing-box/client-sockshttp.json
     sed -i "s/握手网站/$tlsdomain/g" /root/sing-box/client-tun.json
     # custom_port
-    sed -i "s/自定义端口/$custom_port/g" /etc/sing-box/config.json
-    sed -i "s/自定义端口/$custom_port/g" /root/sing-box/client-sockshttp.json
-    sed -i "s/自定义端口/$custom_port/g" /root/sing-box/client-tun.json
+   # sed -i "s/自定义端口/$custom_port/g" /etc/sing-box/config.json
+   # sed -i "s/自定义端口/$custom_port/g" /root/sing-box/client-sockshttp.json
+   # sed -i "s/自定义端口/$custom_port/g" /root/sing-box/client-tun.json
 
     
     systemctl start sing-box
