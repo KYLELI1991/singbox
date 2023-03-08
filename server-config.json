@@ -5,7 +5,7 @@
       "listen_port": 443,
       "handshake": {
         "server": "握手网站",
-        "server_port": "自定义端口" 
+        "server_port": 443
       },
       "detour": "shadowsocks-in"
     },
