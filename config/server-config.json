@@ -3,6 +3,8 @@
     {
       "type": "shadowtls",
       "listen_port": 自定义端口,
+      "version":2,
+      "password": "填写自定义密码",
       "handshake": {
         "server": "握手网站",
         "server_port": 443
