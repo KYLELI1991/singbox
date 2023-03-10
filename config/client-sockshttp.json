@@ -24,6 +24,8 @@
       "tag": "shadowtls-out",
       "server": "填写服务器ip地址",
       "server_port": 自定义端口, 
+      "version":2,
+      "password": "填写自定义密码",
       "tls": {
         "enabled": true,
         "server_name": "握手网站"
