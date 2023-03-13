@@ -78,8 +78,9 @@ install_singbox(){
     rm -f /etc/sing-box/config.json
 
     # generate reality keys
-    private_key=$(sing-box generate reality-keypair | grep PrivateKey | awk -F ":" '{print $2}')
-    public_key=$(sing-box generate reality-keypair | grep PublicKey | awk -F ":" '{print $2}')
+    reality_keys=$(sing-box generate reality-keypair)
+    private_key=$(echo $reality_keys | awk '{print $2}')
+    public_key=$(echo $reality_keys | awk '{print $4}')
 
     # get config
     wget --no-check-certificate -O /etc/sing-box/config.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/vmess/server-config.json
