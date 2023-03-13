@@ -129,6 +129,7 @@ install_singbox(){
     elif [[ -n $(service sing-box status 2>/dev/null | grep "active") ]]; then
         green "Sing-box 安装成功"
         yellow "客户端Socks / HTTP代理模式配置文件已保存到 /root/sing-box/client-sockshttp.json 请自行下载到本地使用"
+        yellow "clash.meta 配置 /n {name: singboxreality, type: vmess, server: $v4, port: $custom_port, uuid: $ps, alterId: 0, cipher: none, network: tcp, udp: true, client-fingerprint: chrome, servername: $tlsdomain, reality-opts: {public-key: $public_key}}"
     fi
 }
 
