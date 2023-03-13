@@ -1,0 +1,33 @@
+{
+    "inbounds":[
+        {
+            "type": "vmess",
+            "listen_port": 自定义端口,
+            "tag": "vmess-in",
+            "users": [{
+                "name": "kyle",
+                "uuid": "填写自定义密码",
+                "alterId": 0
+            }],
+            "tls": {
+                "reality": {
+                    "enabled": true,
+                    "handshake": {
+                      "server": "握手网站",
+                      "server_port": 443
+                    },
+                    "private_key": "私钥",
+                    "short_id": [
+                      ""
+                    ],
+                    "max_time_difference": "1m"
+                  }
+
+            }
+            
+        }
+    ]
+}
+
+
+
