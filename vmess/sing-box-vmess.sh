@@ -82,10 +82,10 @@ install_singbox(){
     public_key=$(sing-box generate reality-keypair | grep PublicKey | awk -F ":" '{print $2}')
 
     # get config
-    wget --no-check-certificate -O /etc/sing-box/config.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/config/server-config.json
+    wget --no-check-certificate -O /etc/sing-box/config.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/vmess/server-config.json
     
     mkdir /root/sing-box
-    wget --no-check-certificate -O /root/sing-box/client-sockshttp.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/config/client-sockshttp.json
+    wget --no-check-certificate -O /root/sing-box/client-sockshttp.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/vmess/client-sockshttp.json
     
     wgcfv6status=$(curl -s6m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
     wgcfv4status=$(curl -s4m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
