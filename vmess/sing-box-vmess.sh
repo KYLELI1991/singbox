@@ -116,8 +116,8 @@ install_singbox(){
     sed -i "s/自定义端口/$custom_port/g" /etc/sing-box/config.json
     sed -i "s/自定义端口/$custom_port/g" /root/sing-box/client-sockshttp.json
     # keys
-    sed -i "s/私钥/${ps}/g" /etc/sing-box/config.json
-    sed -i "s/公钥/${ps}/g" /etc/sing-box/client-sockshttp.json
+    sed -i "s/私钥/$private_key/g" /etc/sing-box/config.json
+    sed -i "s/公钥/$public_key/g" /etc/sing-box/client-sockshttp.json
 
     
     systemctl start sing-box
