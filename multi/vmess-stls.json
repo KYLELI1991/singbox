@@ -1,0 +1,50 @@
+{
+  "inbounds": [
+    {
+      "type": "shadowtls",
+      "listen_port": stls_port,
+      "version":2,
+      "password": "stls_pass",
+      "handshake": {
+        "server": "stls_web",
+        "server_port": 443
+      },
+      "detour": "shadowsocks-in"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "shadowsocks-in",
+      "listen": "127.0.0.1",
+      "method": "2022-blake3-aes-128-gcm",
+      "password": "stls_pass"
+    },
+    {
+          "type": "vmess",
+          "listen_port": vmess_port,
+          "tag": "vmess-in",
+          "users": [{
+              "name": "kyle",
+              "uuid": "uuid_pass",
+              "alterId": 0
+          }],
+          "tls": {
+              "reality": {
+                  "enabled": true,
+                  "handshake": {
+                    "server": "vmess_web",
+                    "server_port": 443
+                  },
+                  "private_key": "pri_key",
+                  "short_id": [
+                    ""
+                  ],
+                  "max_time_difference": "1m"
+                }
+
+          }
+          
+      }
+  ]
+}
+
+
