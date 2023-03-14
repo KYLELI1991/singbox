@@ -4,7 +4,7 @@
       "type": "shadowtls",
       "listen_port": stls_port,
       "version":2,
-      "password": "stls_pass",
+      "password": "handshake_pass",
       "handshake": {
         "server": "stls_web",
         "server_port": 443
@@ -31,7 +31,7 @@
               "reality": {
                   "enabled": true,
                   "handshake": {
-                    "server": "vmess_web",
+                    "server": "handshake_web",
                     "server_port": 443
                   },
                   "private_key": "pri_key",
