@@ -6,7 +6,7 @@
       "version":2,
       "password": "handshake_pass",
       "handshake": {
-        "server": "stls_web",
+        "server": "handshake_web",
         "server_port": 443
       },
       "detour": "shadowsocks-in"
