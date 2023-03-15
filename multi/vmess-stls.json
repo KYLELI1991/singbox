@@ -4,7 +4,7 @@
       "type": "shadowtls",
       "listen_port": stls_port,
       "version":2,
-      "password": "handshake_pass",
+      "password": "stls_pass",
       "handshake": {
         "server": "handshake_web",
         "server_port": 443
