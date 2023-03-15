@@ -1,0 +1,12 @@
+[Unit]
+Description=singbox shadowTLS vmess reality Service
+Documentation=https://github.com/xtls
+After=network.target nss-lookup.target
+
+[Service]
+ExecStart = 安装路径/sing-box run -c 安装路径/vmess_stls.json
+Restart = always
+Type = simple
+
+[Install]
+WantedBy = multi-user.target
