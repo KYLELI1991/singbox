@@ -9,6 +9,7 @@ wget -N --no-check-certificate https://github.com/SagerNet/sing-box/releases/dow
 tar zxvf $filename
 mv $folder sing-box
 cd sing-box
+chmod +x sing-box
 
 # generate keys and uuid
 uuid=$(uuidgen)
