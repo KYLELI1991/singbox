@@ -16,6 +16,7 @@ ps=$(openssl rand -base64 16)
 reality_keys=$(./sing-box generate reality-keypair)
 private_key=$(echo $reality_keys | awk '{print $2}')
 public_key=$(echo $reality_keys | awk '{print $4}')
+cwd=$(pwd)
 
 echo -n "境外白名单网站:"                   
 read  handshake_web
@@ -26,6 +27,7 @@ read  vmess_port
 
 # get config
 wget --no-check-certificate -O vmess_stls.json https://raw.githubusercontent.com/KYLELI1991/singbox/main/multi/vmess-stls.json
+wget --no-check-certificate -O /etc/systemd/system/singbox_multi.service https://raw.githubusercontent.com/KYLELI1991/singbox/main/multi/singbox_multi.service
 
 # get ip
 wgcfv6status=$(curl -s6m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
@@ -49,8 +51,12 @@ sed -i "s/handshake_web/$handshake_web/g" vmess_stls.json
 sed -i "s/stls_port/$stls_port/g" vmess_stls.json
 sed -i "s/vmess_port/$vmess_port/g" vmess_stls.json
 sed -i "s/pri_key/$private_key/g" vmess_stls.json
+sed -i "s#安装路径#$cwd#g" /etc/systemd/system/singbox_multi.service
 
-nohup ./sing-box run -c vvmess_stls.json >/dev/null 2>&1 &
+# nohup ./sing-box run -c vvmess_stls.json >/dev/null 2>&1 &
+
+systemctl enable singbox_multi.service
+systemctl restart singbox_multi.service
 
 clash_proxy=$(echo -e "{name: singbox_vmess, type: vmess, server: $v4, port: $vmess_port, uuid: $uuid, alterId: 0, cipher: none, network: tcp, udp: true, servername: $handshake_web, reality-opts: {public-key: $public_key}} \n - {name: singbox_stls, type: ss, server: $v4, port: $stls_port, cipher: 2022-blake3-aes-128-gcm, password: $ps, plugin: shadow-tls, plugin-opts: {host: $handshake_web, password: $ps}}")
 echo $reality_keys $clash_proxy >>clash_proxy.txt
